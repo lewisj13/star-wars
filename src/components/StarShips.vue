@@ -1,7 +1,9 @@
-p<template>
+<template>
   <div class="starships" >
     <h1> Starships of Star Wars </h1>
    <p>
+
+//Router Links to Other Pages//
       <router-link v-bind:to="{name: 'HelloWorld'}">Home</router-link>
        &bull;
       <router-link v-bind:to="{name: 'People'}">People</router-link>
@@ -9,14 +11,15 @@ p<template>
       <router-link v-bind:to="{name: 'Planets'}">Planets</router-link>
       </p>
 
-    <form v-on:submit.prevent="getShips">
+    <form v-on:submit.prevent="getStarShips">
         <p>Search Starships <input type="text" v-model="name"><button type="submit">Search</button></p>
       </form>
 
       <ul v-if="results && results.length > 0" class="results">
       <li v-for="item of results">
-        <p><strong>{{item.word}}</strong></p>
-        <p>{{item.score}}</p>
+//Fill out//
+        <p><strong>{{}}</strong></p>
+        <p>{{}}</p>
       </li>
     </ul>
 
@@ -25,39 +28,51 @@ p<template>
     <p>Please adjust your search to find.</p>
      </div>
 
-      <ul v-if="errors.length > 0" class="errors">
-         <li v-for="error of errors">
-          {{error.message}}
-        </li>
-      </ul>
-    </div>
-    </template>
+<!--Error Child Component-->
+      <error-list v-bind:errorList="errors"></error-list>
 
-      <script>
-      import axios from 'axios';
-      export default {
-        name: 'StarShips',
-        data () {
-          return {
-            results: null,
-            errors: [],
-            name: [],
+    </div>
+  </template>
+
+  <script>
+  import axios from 'axios';
+  import ErrorList from '@/components/ErrorList';
+  import CubeSpinner from '@/components/CubeSpinner';
+
+
+  export default {
+    name: 'StarShips',
+    components: {
+      'load-spinner': CubeSpinner,
+      'error-list' : ErrorList,
+    },
+    data () {
+  //Fill out//
+    return {
+      posts: [],
+      errors: [],
+      name: [],
+    }
+  },
+  methods: {
+      getStarShips: function(){
+        axios.get('starships/?search=r2', {
+  //Fill out//
+        params: {
+
           }
-        },
-        methods: {
-          StarShips: function(){
-            axios.get('http https://swapi.co/api/starships/?search=r2', {
-            })
-            .then(response => {
-              this.results = response.data;
-            })
-            .catch(error => {
-              this.errors.push(error);
-            });
-          }
-        }
+        })
+        .then(response => {
+          this.results = response.data;
+        })
+        .catch(error => {
+          this.errors.push(error);
+        });
       }
-      </script>
+    }
+  }
+  </script>
+
 
       <!-- Add "scoped" attribute to limit CSS to this component only -->
       <style scoped>

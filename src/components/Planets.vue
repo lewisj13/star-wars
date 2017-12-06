@@ -15,8 +15,9 @@
 
         <ul v-if="results && results.length > 0" class="results">
         <li v-for="item of results">
-          <p><strong>{{item.word}}</strong></p>
-          <p>{{item.score}}</p>
+//Fill out//
+          <p><strong>{{}}</strong></p>
+          <p>{{}}</p>
         </li>
       </ul>
 
@@ -25,64 +26,49 @@
       <p>Please adjust your search to find.</p>
        </div>
 
-        <ul v-if="errors.length > 0" class="errors">
-           <li v-for="error of errors">
-            {{error.message}}
-          </li>
-        </ul>
-      </div>
-      </template>
-
+ <!--Error Child Component-->
+      <error-list v-bind:errorList="errors"></error-list>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import ErrorList from '@/components/ErrorList';
+import CubeSpinner from '@/components/CubeSpinner';
+
+
 export default {
   name: 'Planets',
-    data: () => ({
-        profiles: [],
-        last_name_v: '',
-        movies_urls: [],
-        movies: [],
-        movie_s: [],
-        relateds: [],
-        errors: [],
-        datas: []
-    }),
-    created() {
-            axios.get('https://swapi.co/api/planets/')
-                .then(response => {
-                    this.profiles = response.data.results.slice(0, 2);
-                    for (var i = 0; i < this.profiles.length; i++) {
-                        var profile_val = this.profiles[i];
-                        var full_name_o = profile_val.name;
-                        var full_name_s = full_name_o.split(' ');
-                        var last_name = full_name_s[full_name_s.length - 1];
-                        profile_val['last_name'] = last_name;
+  components: {
+    'load-spinner': CubeSpinner,
+    'error-list' : ErrorList,
+  },
+  data () {
+//Fill out//
+  return {
+    posts: [],
+    errors: [],
+    name: [],
+  }
+},
+methods: {
+    getPlanets: function(){
+      axios.get('planets/?search=r2', {
+//Fill out//
+      params: {
 
-                        var movie_urls = profile_val.films.slice(0, 4);
-                        console.log(profile_val.films.slice(0, 4));
-                        profile_val['movie_details'] = [];
-                        for (var j = 0; j < movie_urls.length; j++) {
-                            axios.get(movie_urls[j])
-                                .then(response => {
-                                    profile_val.movie_details.push(response.data);
-                                })
-                                .catch(e => {
-                                    this.errors.push(e);
-                                });
-                        }
-                        this.datas.push(profile_val);
-                    }
-                })
-                .catch(e => {
-                    this.errors.push(e);
-                });
         }
+      })
+      .then(response => {
+        this.results = response.data;
+      })
+      .catch(error => {
+        this.errors.push(error);
+      });
     }
+  }
+}
 </script>
-
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .planets {

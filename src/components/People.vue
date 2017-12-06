@@ -15,8 +15,9 @@
 
       <ul v-if="results && results.length > 0" class="results">
       <li v-for="item of results">
-        <p><strong>{{item.word}}</strong></p>
-        <p>{{item.score}}</p>
+//Fill out//
+        <p><strong>{{}}</strong></p>
+        <p>{{}}</p>
       </li>
     </ul>
 
@@ -25,19 +26,25 @@
     <p>Please adjust your search.</p>
      </div>
 
-      <ul v-if="errors.length > 0" class="errors">
-         <li v-for="error of errors">
-          {{error.message}}
-        </li>
-      </ul>
+<!--Error Child Component-->
+     <error-list v-bind:errorList="errors"></error-list>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
+import ErrorList from '@/components/ErrorList';
+import CubeSpinner from '@/components/CubeSpinner';
+
+
 export default {
   name: 'People',
+  components: {
+    'load-spinner': CubeSpinner,
+    'error-list' : ErrorList,
+  },
   data () {
+//Fill out//
   return {
     posts: [],
     errors: [],
@@ -46,8 +53,9 @@ export default {
 },
 methods: {
     getPeople: function(){
-      axios.get('https://swapi.co/api/people/?search=r2', {
-        params: {
+      axios.get('people/?search=r2', {
+//Fill out//
+      params: {
 
         }
       })
