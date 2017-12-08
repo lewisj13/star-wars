@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'ErrorList',
+  name: 'errorList',
   data () {
     return {
 

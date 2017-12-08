@@ -3,7 +3,6 @@
     <h1> Starships of Star Wars </h1>
    <p>
 
-//Router Links to Other Pages//
       <router-link v-bind:to="{name: 'HelloWorld'}">Home</router-link>
        &bull;
       <router-link v-bind:to="{name: 'People'}">People</router-link>
@@ -15,15 +14,13 @@
         <p>Search Starships <input type="text" v-model="name"><button type="submit">Search</button></p>
       </form>
 
-      <ul v-if="results && results.length > 0" class="results">
-      <li v-for="item of results">
-//Fill out//
-        <p><strong>{{}}</strong></p>
-        <p>{{}}</p>
+      <ul v-if="results && results.count > 0" class="results">
+      <li v-for="item of results.results">
+        <p><strong>{{item.name}}</strong></p>
       </li>
     </ul>
 
-      <div v-else-if="results && results.length==0" class="no-results">
+      <div v-else-if="results && results.count==0" class="no-results">
     <h2>No Starship Found</h2>
     <p>Please adjust your search to find.</p>
      </div>
@@ -35,7 +32,7 @@
   </template>
 
   <script>
-  import axios from 'axios';
+  import {API} from '@/common/api';
   import ErrorList from '@/components/ErrorList';
   import CubeSpinner from '@/components/CubeSpinner';
 
@@ -47,19 +44,17 @@
       'error-list' : ErrorList,
     },
     data () {
-  //Fill out//
     return {
-      posts: [],
+      results: [],
       errors: [],
-      name: [],
+      name: '',
     }
   },
   methods: {
       getStarShips: function(){
-        axios.get('starships/?search=r2', {
-  //Fill out//
+        API.get('starships/', {
         params: {
-
+            search: this.name
           }
         })
         .then(response => {
@@ -113,8 +108,8 @@
         padding: 0.5rem;
         width: 200px;
         min-height: 100px;
-        color: #fff;
-        background: rgba(0,0,0,0.7);
+        color: #000000;
+        background: #FFFFFF;
       }
       ul.errors {
         list-style-type: none;

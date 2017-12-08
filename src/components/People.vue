@@ -13,15 +13,13 @@
         <p>Search for People <input type="text" v-model="name"><button type="submit">Search</button></p>
       </form>
 
-      <ul v-if="results && results.length > 0" class="results">
-      <li v-for="item of results">
-//Fill out//
-        <p><strong>{{}}</strong></p>
-        <p>{{}}</p>
-      </li>
+      <ul v-if="results && results.count > 0" class="results">
+        <li v-for="item of results.results">
+          <p><strong>{{item.name}}</strong></p>
+        </li>
     </ul>
 
-      <div v-else-if="results && results.length==0" class="no-results">
+      <div v-else-if="results && results.count==0" class="no-results">
     <h2>No People Found</h2>
     <p>Please adjust your search.</p>
      </div>
@@ -32,7 +30,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import {API} from '@/common/api';
 import ErrorList from '@/components/ErrorList';
 import CubeSpinner from '@/components/CubeSpinner';
 
@@ -46,17 +44,17 @@ export default {
   data () {
 //Fill out//
   return {
-    posts: [],
+    results: [],
     errors: [],
-    name: [],
+    name: '',
   }
 },
 methods: {
     getPeople: function(){
-      axios.get('people/?search=r2', {
+      API.get('people/', {
 //Fill out//
       params: {
-
+          search: this.name
         }
       })
       .then(response => {
@@ -109,8 +107,8 @@ ul.results {
   padding: 0.5rem;
   width: 200px;
   min-height: 100px;
-  color: #fff;
-  background: rgba(0,0,0,0.7);
+  color: #000000;
+  background: #FFFFFF;
 }
 ul.errors {
   list-style-type: none;
