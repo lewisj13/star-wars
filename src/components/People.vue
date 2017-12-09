@@ -103,12 +103,10 @@ ul.results {
 .results li {
   display: inline-block;
   margin: 10px;
-  border: solid 1px #333;
   padding: 0.5rem;
   width: 200px;
   min-height: 100px;
   color: #000000;
-  background: #FFFFFF;
 }
 ul.errors {
   list-style-type: none;

@@ -16,6 +16,7 @@
         <ul v-if="results && results.count > 0" class="results">
           <li v-for="item of results.results">
           <p><strong>{{item.name}}</strong></p>
+          <p>{{item.planetData}}</p>
         </li>
       </ul>
 
@@ -79,9 +80,9 @@ input[type="text"]{
   border-bottom: 1px solid #333;
   width: 300px;
   font-size: 1.4rem;
-  color: ##ffffff;
+  color: #000000;
   font-weight: 300;
-  background: ##ffffff;
+  background: #ffffff;
   padding: 0.5rem;
   }
 button{
@@ -96,16 +97,15 @@ button{
 ul.results {
   list-style-type: none;
   padding: 0;
+  color: #000000;
 }
 .results li {
   display: inline-block;
   margin: 10px;
-  border: solid 1px #333;
   padding: 0.5rem;
-  width: 200px;
+  width: 500px;
   min-height: 100px;
   color: #000000;
-  background: #FFFFFF;
 }
 ul.errors {
   list-style-type: none;

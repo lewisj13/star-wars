@@ -19,7 +19,7 @@ export default {
     }
   },
   props: {
-    errorList: []
+    errorList: ''
   }
 }
 </script>

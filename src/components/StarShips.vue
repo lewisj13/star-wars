@@ -1,4 +1,4 @@
-<template>
+bby<template>
   <div class="starships" >
     <h1> Starships of Star Wars </h1>
    <p>
@@ -104,12 +104,10 @@
       .results li {
         display: inline-block;
         margin: 10px;
-        border: solid 1px #333;
         padding: 0.5rem;
         width: 200px;
         min-height: 100px;
         color: #000000;
-        background: #FFFFFF;
       }
       ul.errors {
         list-style-type: none;
@@ -126,6 +124,9 @@
         text-align: center;
         font-size: 450%;
         text-shadow: -2px 0 #ffff00, 0 2px #ffff00, 2px 0 #ffff00, 0 -2px #ffff00;
+      }
+      h2 {
+        color: #ffffff;
       }
       a {
         color: #ffff00;
